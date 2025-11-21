@@ -1,0 +1,46 @@
+[ {
+  "id" : "88c73dd8-0c2e-44ac-a5ca-6b83a956b3b7",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-20T19:24:50.211933200Z"
+}, {
+  "id" : "9245bda6-56fc-42d6-b094-e48afab8324d",
+  "customerName" : "test",
+  "customerEmail" : "test",
+  "issueDescription" : "test",
+  "customerPhone" : null,
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T06:42:51.498240Z"
+}, {
+  "id" : "081ad5eb-d146-450b-ab3a-e3951cbbcb1e",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "",
+  "issueDescription" : "EV Scooter not booting up despite full charge, and poor customer care response.",
+  "customerPhone" : null,
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T06:47:24.111408100Z"
+}, {
+  "id" : "8d5245e2-06e8-4ee1-917b-cb354d253df4",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan.paul@example.com",
+  "issueDescription" : "EV Scooter not booting up despite full charge, and poor customer care response.",
+  "customerPhone" : "123-456-7890",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T07:43:57.640765900Z"
+}, {
+  "id" : "9d6bbdec-c0d6-4fe9-9c1a-8f3fadc57f5c",
+  "customerName" : "Sathiya",
+  "customerEmail" : "sathiya.seelanl@example.com",
+  "issueDescription" : "Radio is not connecting",
+  "customerPhone" : "123-456-7890",
+  "customerId" : null,
+  "priority" : "LOW",
+  "createdAt" : "2025-11-21T11:35:07.597716700Z"
+} ]
