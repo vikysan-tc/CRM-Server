@@ -117,6 +117,7 @@ public class InMemoryTicketService implements TicketService {
         store.put(ticket.getId(), ticket);
         try {
             List<Ticket> tickets = readTickets();
+            ticket.setTicketReference("TKT#" + (tickets.size() + 1));
             tickets.add(ticket);
             writeTickets(tickets);
         } catch (IOException e) {

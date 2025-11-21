@@ -1,12 +1,10 @@
 package com.ibm.orchestrate.controller;
 
+import com.ibm.orchestrate.model.Booking;
+import com.ibm.orchestrate.service.impl.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +22,7 @@ import java.util.List;
 public class IBMDemoController {
 
     private final TicketService ticketService;
+    private final BookingService bookingService;
 
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketRequest request) {
@@ -39,5 +38,13 @@ public class IBMDemoController {
         List<Ticket> tickets = ticketService.getAllTickets();
         log.info("Exiting getAllTickets found {} tickets", tickets != null ? tickets.size() : 0);
         return ResponseEntity.ok(tickets);
+    }
+
+    @GetMapping("/bookings")
+    public ResponseEntity<List<Booking>> getBookingsByEmail(@RequestParam(value = "email", required = false) String email) {
+        log.info("Entering getBookingsByEmail email={}", email);
+        List<Booking> bookings = bookingService.getBookingsByCustomerEmail(email);
+        log.info("Exiting getBookingsByEmail found {} bookings for {}", bookings != null ? bookings.size() : 0, email);
+        return ResponseEntity.ok(bookings);
     }
 }

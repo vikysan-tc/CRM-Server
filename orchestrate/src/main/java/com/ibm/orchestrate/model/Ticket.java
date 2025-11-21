@@ -17,6 +17,7 @@ public class Ticket {
     private String customerId;
     private String priority;
     private Instant createdAt;
+    private String ticketReference;
 
     public Ticket(String customerName, String customerEmail, String issueDescription, String customerPhone, String customerId, String priority) {
         this.id = UUID.randomUUID().toString();

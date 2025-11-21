@@ -1,46 +1,61 @@
 [ {
-  "id" : "88c73dd8-0c2e-44ac-a5ca-6b83a956b3b7",
+  "id" : "413a5a3c-c16d-45d5-b096-650ce8c1da9c",
   "customerName" : "Logan Paul",
   "customerEmail" : "logan@example.com",
   "issueDescription" : "My EV Scooter won",
   "customerPhone" : "555-1234",
   "customerId" : null,
   "priority" : "HIGH",
-  "createdAt" : "2025-11-20T19:24:50.211933200Z"
+  "createdAt" : "2025-11-21T18:45:46.906498800Z",
+  "ticketReference" : "TKT#1"
 }, {
-  "id" : "9245bda6-56fc-42d6-b094-e48afab8324d",
-  "customerName" : "test",
-  "customerEmail" : "test",
-  "issueDescription" : "test",
-  "customerPhone" : null,
-  "customerId" : null,
-  "priority" : "HIGH",
-  "createdAt" : "2025-11-21T06:42:51.498240Z"
-}, {
-  "id" : "081ad5eb-d146-450b-ab3a-e3951cbbcb1e",
+  "id" : "afaa5596-a71a-4c8d-b104-a6219e95a9d8",
   "customerName" : "Logan Paul",
-  "customerEmail" : "",
-  "issueDescription" : "EV Scooter not booting up despite full charge, and poor customer care response.",
-  "customerPhone" : null,
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
   "customerId" : null,
   "priority" : "HIGH",
-  "createdAt" : "2025-11-21T06:47:24.111408100Z"
+  "createdAt" : "2025-11-21T18:46:06.869815500Z",
+  "ticketReference" : "TKT#2"
 }, {
-  "id" : "8d5245e2-06e8-4ee1-917b-cb354d253df4",
+  "id" : "ab1b95e4-d971-49c0-b124-2ce358e689d3",
   "customerName" : "Logan Paul",
-  "customerEmail" : "logan.paul@example.com",
-  "issueDescription" : "EV Scooter not booting up despite full charge, and poor customer care response.",
-  "customerPhone" : "123-456-7890",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won't boot despite full charge",
+  "customerPhone" : "555-1234",
   "customerId" : null,
   "priority" : "HIGH",
-  "createdAt" : "2025-11-21T07:43:57.640765900Z"
+  "createdAt" : "2025-11-21T18:49:17.090452500Z",
+  "ticketReference" : "TKT#3"
 }, {
-  "id" : "9d6bbdec-c0d6-4fe9-9c1a-8f3fadc57f5c",
-  "customerName" : "Sathiya",
-  "customerEmail" : "sathiya.seelanl@example.com",
-  "issueDescription" : "Radio is not connecting",
-  "customerPhone" : "123-456-7890",
+  "id" : "0f313ee8-2b70-4785-9582-0cf1b5908053",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
   "customerId" : null,
-  "priority" : "LOW",
-  "createdAt" : "2025-11-21T11:35:07.597716700Z"
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:49:40.420261500Z",
+  "ticketReference" : "TKT#4"
+}, {
+  "id" : "59812619-3b03-4be6-a4ec-793df9f89452",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "Need refund for cancelled booking",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:53:28.484150600Z",
+  "ticketReference" : "TKT#5"
+}, {
+  "id" : "dde4a5ff-1459-473c-a6cf-c364a354aaf4",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "Need refund for cancelled booking",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:57:05.901325Z",
+  "ticketReference" : "TKT#6"
 } ]
