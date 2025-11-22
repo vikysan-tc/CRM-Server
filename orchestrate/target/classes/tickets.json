@@ -1,0 +1,61 @@
+[ {
+  "id" : "413a5a3c-c16d-45d5-b096-650ce8c1da9c",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:45:46.906498800Z",
+  "ticketReference" : "TKT#1"
+}, {
+  "id" : "afaa5596-a71a-4c8d-b104-a6219e95a9d8",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:46:06.869815500Z",
+  "ticketReference" : "TKT#2"
+}, {
+  "id" : "ab1b95e4-d971-49c0-b124-2ce358e689d3",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won't boot despite full charge",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:49:17.090452500Z",
+  "ticketReference" : "TKT#3"
+}, {
+  "id" : "0f313ee8-2b70-4785-9582-0cf1b5908053",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "My EV Scooter won",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:49:40.420261500Z",
+  "ticketReference" : "TKT#4"
+}, {
+  "id" : "59812619-3b03-4be6-a4ec-793df9f89452",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "Need refund for cancelled booking",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:53:28.484150600Z",
+  "ticketReference" : "TKT#5"
+}, {
+  "id" : "dde4a5ff-1459-473c-a6cf-c364a354aaf4",
+  "customerName" : "Logan Paul",
+  "customerEmail" : "logan@example.com",
+  "issueDescription" : "Need refund for cancelled booking",
+  "customerPhone" : "555-1234",
+  "customerId" : null,
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-21T18:57:05.901325Z",
+  "ticketReference" : "TKT#6"
+} ]
