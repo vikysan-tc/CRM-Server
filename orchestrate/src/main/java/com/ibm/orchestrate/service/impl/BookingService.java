@@ -21,6 +21,7 @@ public class BookingService {
     public List<Booking> getBookingsByCustomerEmail(String email) {
         try {
             ClassPathResource resource = new ClassPathResource("bookings.json");
+            log.info("Reading bookings for email={} from {}", email, resource.getPath());
 
             try (InputStream is = resource.getInputStream()) {
                 List<Booking> all = objectMapper.readValue(is, new TypeReference<List<Booking>>() {});
