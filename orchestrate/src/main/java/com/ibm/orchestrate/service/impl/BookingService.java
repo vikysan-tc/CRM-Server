@@ -8,6 +8,10 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,23 +24,46 @@ public class BookingService {
 
     public List<Booking> getBookingsByCustomerEmail(String email) {
         try {
-            ClassPathResource resource = new ClassPathResource("D:\\Personal\\IBM\\orchestrate\\orchestrate\\src\\main\\resources\\bookings.json");
-            log.info("Reading bookings for email={} from {}", email, resource.getPath());
+            Path absolute = Paths.get("D:\\Personal\\IBM\\orchestrate\\orchestrate\\src\\main\\resources\\bookings.json");
+            List<Booking> all;
 
-            try (InputStream is = resource.getInputStream()) {
-                List<Booking> all = objectMapper.readValue(is, new TypeReference<List<Booking>>() {});
-
-                if (email == null || email.isBlank()) {
-                    return all;
+            if (Files.exists(absolute)) {
+                byte[] bytes = Files.readAllBytes(absolute);
+                if (bytes.length == 0) {
+                    all = new ArrayList<>();
+                } else {
+                    all = objectMapper.readValue(bytes, new TypeReference<List<Booking>>() {});
                 }
-
-                String target = email.trim().toLowerCase();
-
-                return all.stream()
-                        .filter(b -> b.getCustomerEmail() != null &&
-                                b.getCustomerEmail().trim().toLowerCase().equals(target))
-                        .collect(Collectors.toList());
+            } else {
+                // fallback to classpath resource (e.g., when running from jar or IDE with resources in classpath)
+                ClassPathResource resource = new ClassPathResource("bookings.json");
+                if (resource.exists()) {
+                    log.info("Reading bookings for email={} from classpath resource", email);
+                    try (InputStream is = resource.getInputStream()) {
+                        all = objectMapper.readValue(is, new TypeReference<List<Booking>>() {});
+                    }
+                } else {
+                    // create the file at the absolute path so future writes/reads work consistently
+                    try {
+                        Path parent = absolute.getParent();
+                        if (parent != null) Files.createDirectories(parent);
+                        Files.write(absolute, "[]".getBytes());
+                    } catch (Exception ex) {
+                        log.warn("Unable to create bookings.json at {}: {}", absolute, ex.getMessage());
+                    }
+                    all = new ArrayList<>();
+                }
             }
+
+            if (email == null || email.isBlank()) {
+                return all;
+            }
+
+            String target = email.trim().toLowerCase();
+
+            return all.stream()
+                    .filter(b -> b.getCustomerEmail() != null && b.getCustomerEmail().trim().toLowerCase().equals(target))
+                    .collect(Collectors.toList());
 
         } catch (Exception e) {
             log.error("Failed to read bookings", e);
