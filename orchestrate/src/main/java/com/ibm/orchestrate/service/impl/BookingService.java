@@ -20,7 +20,7 @@ public class BookingService {
 
     public List<Booking> getBookingsByCustomerEmail(String email) {
         try {
-            ClassPathResource resource = new ClassPathResource("bookings.json");
+            ClassPathResource resource = new ClassPathResource("D:\\Personal\\IBM\\orchestrate\\orchestrate\\src\\main\\resources\\bookings.json");
             log.info("Reading bookings for email={} from {}", email, resource.getPath());
 
             try (InputStream is = resource.getInputStream()) {
