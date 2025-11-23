@@ -1,5 +1,6 @@
 package com.ibm.orchestrate.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@Slf4j
 public class InMemoryTicketService implements TicketService {
 
     private final Map<String, Ticket> store = new ConcurrentHashMap<>();
@@ -109,6 +111,7 @@ public class InMemoryTicketService implements TicketService {
     }
 
     private synchronized void writeTickets(List<Ticket> tickets) throws IOException {
+        log.info("Writing {} tickets to file {} for email {}", tickets.size(), file.toFile(), tickets.get(0).getCustomerEmail());
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(file.toFile(), tickets);
     }
 
@@ -146,6 +149,7 @@ public class InMemoryTicketService implements TicketService {
     }
 
     private synchronized void writeBookings(List<Booking> bookings) throws IOException {
+        log.info("Writing {} bookings to file {} for email {}", bookings.size(), bookingsFile.toFile(), bookings.get(0).customerEmail);
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(bookingsFile.toFile(), bookings);
     }
 
