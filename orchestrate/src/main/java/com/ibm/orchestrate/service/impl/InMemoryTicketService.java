@@ -100,6 +100,7 @@ public class InMemoryTicketService implements TicketService {
         if (Files.notExists(file)) {
             return new ArrayList<>();
         }
+        log.info("Reading tickets from file {}", file.toFile().getPath());
         byte[] bytes = Files.readAllBytes(file);
         if (bytes.length == 0) return new ArrayList<>();
         Ticket[] arr = objectMapper.readValue(bytes, Ticket[].class);
