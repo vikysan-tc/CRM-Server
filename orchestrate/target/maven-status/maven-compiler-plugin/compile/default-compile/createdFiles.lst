@@ -7,3 +7,4 @@ com\ibm\orchestrate\service\TicketService.class
 com\ibm\orchestrate\model\Booking.class
 com\ibm\orchestrate\service\impl\BookingService.class
 com\ibm\orchestrate\model\TicketRequest.class
+com\ibm\orchestrate\service\impl\InMemoryTicketService$Booking.class
