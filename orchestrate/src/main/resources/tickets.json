@@ -58,4 +58,24 @@
   "priority" : "HIGH",
   "createdAt" : "2025-11-21T18:57:05.901325Z",
   "ticketReference" : "TKT#6"
+}, {
+  "id" : "ad933638-b304-4b98-a996-1ddf1a3e33d8",
+  "customerName" : "Jane Doe",
+  "customerEmail" : "jane@example.com",
+  "issueDescription" : "Cannot login",
+  "customerPhone" : "555-1234",
+  "customerId" : "CUST-001",
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-23T08:04:34.133376100Z",
+  "ticketReference" : "TKT#7"
+}, {
+  "id" : "a1a84902-a43f-4368-9e39-fd191b8e797a",
+  "customerName" : "Jane Doe",
+  "customerEmail" : "mary@example.com",
+  "issueDescription" : "Cannot login",
+  "customerPhone" : "555-1234",
+  "customerId" : "CUST-001",
+  "priority" : "HIGH",
+  "createdAt" : "2025-11-23T08:05:47.851567900Z",
+  "ticketReference" : "TKT#8"
 } ]

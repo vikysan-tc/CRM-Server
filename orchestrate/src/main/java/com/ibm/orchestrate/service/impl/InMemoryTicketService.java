@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +24,17 @@ public class InMemoryTicketService implements TicketService {
 
     private final Map<String, Ticket> store = new ConcurrentHashMap<>();
     private final Path file;
+    private final Path bookingsFile;
     private final ObjectMapper objectMapper;
 
     @Autowired
     public InMemoryTicketService(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.file = chooseFilePath();
+        this.bookingsFile = chooseFilePath("bookings.json");
         try {
-            ensureFileExists();
+            ensureFileExists(this.file);
+            ensureFileExists(this.bookingsFile);
             // load existing tickets into memory
             List<Ticket> existing = readTickets();
             if (existing != null) {
@@ -44,11 +48,15 @@ public class InMemoryTicketService implements TicketService {
     }
 
     /**
-     * Use the absolute path requested by the user. If not writable, fall back to working dir.
+     * Keep original no-arg version for tickets.json, and add a filename overload for other files.
      */
     private Path chooseFilePath() {
+        return chooseFilePath("tickets.json");
+    }
+
+    private Path chooseFilePath(String filename) {
         // Absolute path requested by the user
-        Path absoluteRequested = Paths.get("D:\\Personal\\IBM\\orchestrate\\orchestrate\\src\\main\\resources\\tickets.json");
+        Path absoluteRequested = Paths.get("D:\\Personal\\IBM\\orchestrate\\orchestrate\\src\\main\\resources\\" + filename);
         try {
             Path parent = absoluteRequested.getParent();
             if (parent != null) {
@@ -63,7 +71,7 @@ public class InMemoryTicketService implements TicketService {
         } catch (IOException ex) {
             // Fallback to previous behavior: try resources relative path, then working dir
             try {
-                Path resourcesPath = Paths.get("src", "main", "resources", "tickets.json");
+                Path resourcesPath = Paths.get("src", "main", "resources", filename);
                 Path parent = resourcesPath.getParent();
                 if (parent != null) {
                     Files.createDirectories(parent);
@@ -74,15 +82,15 @@ public class InMemoryTicketService implements TicketService {
                 }
                 return resourcesPath;
             } catch (IOException ex2) {
-                return Paths.get("tickets.json");
+                return Paths.get(filename);
             }
         }
     }
 
-    private synchronized void ensureFileExists() throws IOException {
-        if (Files.notExists(file)) {
-            Files.createFile(file);
-            Files.write(file, "[]".getBytes());
+    private synchronized void ensureFileExists(Path p) throws IOException {
+        if (Files.notExists(p)) {
+            Files.createFile(p);
+            Files.write(p, "[]".getBytes());
         }
     }
 
@@ -104,6 +112,57 @@ public class InMemoryTicketService implements TicketService {
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(file.toFile(), tickets);
     }
 
+    // Booking helpers
+    private static class Booking {
+        public String bookingId;
+        public String status;
+        public String refund;
+        public String bookingDate;
+        public String customerEmail;
+
+        public Booking() {}
+
+        public Booking(String bookingId, String status, String refund, String bookingDate, String customerEmail) {
+            this.bookingId = bookingId;
+            this.status = status;
+            this.refund = refund;
+            this.bookingDate = bookingDate;
+            this.customerEmail = customerEmail;
+        }
+    }
+
+    private synchronized List<Booking> readBookings() throws IOException {
+        if (Files.notExists(bookingsFile)) {
+            return new ArrayList<>();
+        }
+        byte[] bytes = Files.readAllBytes(bookingsFile);
+        if (bytes.length == 0) return new ArrayList<>();
+        Booking[] arr = objectMapper.readValue(bytes, Booking[].class);
+        List<Booking> list = new ArrayList<>();
+        if (arr != null) {
+            for (Booking b : arr) list.add(b);
+        }
+        return list;
+    }
+
+    private synchronized void writeBookings(List<Booking> bookings) throws IOException {
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(bookingsFile.toFile(), bookings);
+    }
+
+    private synchronized void addDummyBookingsForEmail(String email) {
+        try {
+            List<Booking> bookings = readBookings();
+            int base = bookings.size();
+            Booking b1 = new Booking("BKG-" + (base + 1), "CANCELLED", "PENDING", LocalDate.now().toString(), email);
+            Booking b2 = new Booking("BKG-" + (base + 2), "CANCELLED", "COMPLETED", LocalDate.now().minusDays(2).toString(), email);
+            bookings.add(b1);
+            bookings.add(b2);
+            writeBookings(bookings);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to persist bookings", e);
+        }
+    }
+
     @Override
     public synchronized Ticket createTicket(TicketRequest request) {
         Ticket ticket = new Ticket(
@@ -120,6 +179,9 @@ public class InMemoryTicketService implements TicketService {
             ticket.setTicketReference("TKT#" + (tickets.size() + 1));
             tickets.add(ticket);
             writeTickets(tickets);
+
+            // add two dummy bookings for this ticket's customer email
+            addDummyBookingsForEmail(ticket.getCustomerEmail());
         } catch (IOException e) {
             throw new RuntimeException("Failed to persist ticket", e);
         }
